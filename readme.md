@@ -3,7 +3,7 @@
 Besoins fonctionnels :
 
 - [x] Créer un joueur
-
+- [ ]
 
 
 

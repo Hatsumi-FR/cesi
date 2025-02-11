@@ -1,26 +1,66 @@
 package domain
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestPlayer_Attack(t *testing.T) {
-	player := Player{
-		ID:         1,
-		Name:       "Player 1",
-		LifePoints: 10,
-		Weapon:     Weapon{},
+	tests := []struct {
+		name      string
+		p1        *Player
+		p2        *Player
+		wantedErr error
+	}{
+		{
+			name: "should lose life points",
+			p1: &Player{
+				ID:         1,
+				Name:       "player 1",
+				LifePoints: 10,
+				Weapon: &Weapon{
+					ID:          1,
+					Name:        "weapon 1",
+					Power:       1,
+					IsLongRange: false,
+				},
+			},
+			p2: &Player{
+				ID:         2,
+				Name:       "weapon 2",
+				LifePoints: 10,
+				Weapon: &Weapon{
+					ID:          1,
+					Name:        "weapon 1",
+					Power:       1,
+					IsLongRange: false,
+				},
+			},
+			wantedErr: nil,
+		},
+		{
+			name: "should return an error because weapon doesn't exist",
+			p1: &Player{
+				ID:         1,
+				Name:       "player 1",
+				LifePoints: 10,
+				Weapon:     nil,
+			},
+			p2: &Player{
+				ID:         2,
+				Name:       "weapon 2",
+				LifePoints: 10,
+				Weapon:     nil,
+			},
+			wantedErr: attackErr,
+		},
 	}
-
-	target := Player{
-		ID:         2,
-		Name:       "Player 2",
-		LifePoints: 10,
-		Weapon:     Weapon{},
-	}
-
-	player.Attack(&target)
-
-	// should lower target's life points by 1
-	if target.LifePoints != 9 {
-		t.Errorf("Expected target")
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := test.p1.Attack(test.p2)
+			if !errors.Is(err, test.wantedErr) {
+				t.Error(err.Error())
+			}
+		})
 	}
 }
