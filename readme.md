@@ -3,7 +3,8 @@
 Besoins fonctionnels :
 
 - [x] Créer un joueur
-- [ ]
+- [x] Attaquer un joueur
+- [ ] Soigner
 
 
 

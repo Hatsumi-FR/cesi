@@ -15,3 +15,12 @@ func (p *Player) Attack(target *Player) error {
 	target.LifePoints -= p.Weapon.Power
 	return nil
 }
+
+func (p *Player) Heal(healValue int) error {
+	targetHealth := p.LifePoints + healValue
+	if targetHealth == 10 {
+		return overhealErr
+	}
+
+	return nil
+}

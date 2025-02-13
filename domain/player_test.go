@@ -64,3 +64,19 @@ func TestPlayer_Attack(t *testing.T) {
 		})
 	}
 }
+
+func TestPlayer_Heal(t *testing.T) {
+	// init player
+	p1 := Player{
+		ID:         1,
+		Name:       "p1",
+		LifePoints: 10,
+		Weapon:     nil,
+	}
+	t.Run(t.Name(), func(t *testing.T) {
+		p1.Heal()
+		if p1.LifePoints != 11 {
+			t.Errorf("player should have 11 hp \n current hp : %d", p1.LifePoints)
+		}
+	})
+}
