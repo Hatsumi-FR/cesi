@@ -1,14 +1,14 @@
 package main
 
 import (
-	"cesi/repository"
+	"cesi/adapters/sqlite"
 	"cesi/server"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 )
 
 func main() {
-	repo, err := repository.NewRepository()
+	repo, err := sqlite.NewRepository()
 	if err != nil {
 		panic(err)
 	}

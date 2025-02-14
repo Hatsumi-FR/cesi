@@ -10,7 +10,7 @@ type createPlayerResponse struct {
 	ID int `json:"id"`
 }
 
-func (s *Server) createPlayerHandler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) CreatePlayerHandler(w http.ResponseWriter, r *http.Request) {
 	p := domain.Player{}
 	// unmarshal the request body into the player struct
 	err := json.NewDecoder(r.Body).Decode(&p)

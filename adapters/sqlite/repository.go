@@ -1,20 +1,15 @@
-package repository
+package sqlite
 
 import (
-	"cesi/domain"
+	"cesi/adapters"
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"io/ioutil"
 	"log"
 )
 
-type Repositorer interface {
-	CreatePlayer(p domain.Player) (int, error)
-	Init() error
-}
-
 type Repository struct {
-	Repositorer
+	adapters.Repositorer
 	db *sql.DB
 }
 

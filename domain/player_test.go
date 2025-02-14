@@ -74,7 +74,7 @@ func TestPlayer_Heal(t *testing.T) {
 		Weapon:     nil,
 	}
 	t.Run(t.Name(), func(t *testing.T) {
-		p1.Heal()
+		p1.Heal(1)
 		if p1.LifePoints != 11 {
 			t.Errorf("player should have 11 hp \n current hp : %d", p1.LifePoints)
 		}
